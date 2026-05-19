@@ -14,11 +14,11 @@ from aiogram.fsm.context import FSMContext
 # ============================================================
 # НАСТРОЙКИ
 # ============================================================
-BOT_TOKEN = "ТВОЙ_ТОКЕН_БОТА"           # ⚠️ Токен бота
-CHANNEL_ID = "@tvoi_kanal"              # ⚠️ ID канала для подписки
-CHANNEL_URL = "https://t.me/tvoi_kanal" # ⚠️ Ссылка на канал
-ADMIN_ID = 123456789                     # ⚠️ Твой Telegram ID
-ADMIN_GROUP_ID = -1001234567890          # ⚠️ ID группы для выдачи заявок
+BOT_TOKEN = "8972867358:AAGJ-GBQ3iQZXO6Z26bc4-bsYfVIC70tshM"           # ⚠️ Токен бота
+CHANNEL_ID = "-1003956147584"              # ⚠️ ID канала для подписки
+CHANNEL_URL = "https://t.me/+GgnqeYGubIxkMDBi" # ⚠️ Ссылка на канал
+ADMIN_ID = 8628847299                   # ⚠️ Твой Telegram ID
+ADMIN_GROUP_ID = -1003996091188          # ⚠️ ID группы для выдачи заявок
 
 MENU_PHOTO_PATH = "menu_photo.jpg"      # ⚠️ Фото для меню
 INSTRUCTION_URL = "https://t.me/..."    # ⚠️ Ссылка на инструкцию
