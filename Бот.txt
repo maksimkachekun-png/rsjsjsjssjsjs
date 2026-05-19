@@ -2,6 +2,7 @@ import asyncio
 import logging
 import sqlite3
 import re
+import os
 from datetime import datetime
 
 from aiogram import Bot, Dispatcher, types
@@ -390,43 +391,36 @@ async def process_check_sub(callback: types.CallbackQuery):
 # ============================================================
 # КОМАНДА /menu
 # ============================================================
+
 @dp.message(Command("menu"))
 async def cmd_menu(message: types.Message):
     if not await check_subscription(message.from_user.id):
         await message.answer("❌ Сначала подпишитесь на канал!", reply_markup=get_sub_keyboard())
         return
 
-    try:
-        photo = FSInputFile(MENU_PHOTO_PATH)
-        await message.answer_photo(
-            photo=photo,
-            caption="📋 *Главное меню*\n\nВыберите нужный раздел:",
-            parse_mode="Markdown",
-            reply_markup=get_menu_keyboard()
-        )
-    except FileNotFoundError:
-        await message.answer(
-            "📋 *Главное меню*\n\nВыберите нужный раздел:",
-            parse_mode="Markdown",
-            reply_markup=get_menu_keyboard()
-        )
-
-@dp.callback_query(lambda c: c.data == "back_to_menu")
-async def cb_back_to_menu(callback: types.CallbackQuery, state: FSMContext):
-    await state.clear()
-    try:
-        await callback.message.edit_caption(
-            caption="📋 *Главное меню*\n\nВыберите нужный раздел:",
-            parse_mode="Markdown",
-            reply_markup=get_menu_keyboard()
-        )
-    except Exception:
-        await callback.message.edit_text(
-            "📋 *Главное меню*\n\nВыберите нужный раздел:",
-            parse_mode="Markdown",
-            reply_markup=get_menu_keyboard()
-        )
-    await callback.answer()
+    # Проверяем существование файла
+    photo_path = MENU_PHOTO_PATH
+    photo_exists = os.path.isfile(photo_path)
+    
+    if photo_exists:
+        try:
+            photo = FSInputFile(photo_path)
+            await message.answer_photo(
+                photo=photo,
+                caption="📋 *Главное меню*\n\nВыберите нужный раздел:",
+                parse_mode="Markdown",
+                reply_markup=get_menu_keyboard()
+            )
+            return
+        except Exception as e:
+            logging.error(f"Ошибка отправки фото: {e}")
+    
+    # Если фото нет или ошибка — отправляем текст
+    await message.answer(
+        "📋 *Главное меню*\n\nВыберите нужный раздел:",
+        parse_mode="Markdown",
+        reply_markup=get_menu_keyboard()
+    )
 
 # ============================================================
 # СДАТЬ НОМЕР — ВЫБОР СПОСОБА
