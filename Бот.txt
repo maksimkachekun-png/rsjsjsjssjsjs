@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 TOKEN = '8972867358:AAGJ-GBQ3iQZXO6Z26bc4-bsYfVIC70tshM'
-CHANNEL_ID = '-1003956147584'
+CHANNEL_ID = 'https://t.me/+GgnqeYGubIxkMDBi'
 GROUP_ID = -1003996091188
 ADMIN_IDS = [8628847299]
 CHAT_LINK = 'https://t.me/your_chat'
